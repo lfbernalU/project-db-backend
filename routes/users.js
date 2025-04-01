@@ -37,6 +37,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+
   try {
     const { username, password } = req.body;
 
@@ -50,7 +51,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Credenciales inválidas' });
     }
 
-    const token = jwt.sign({ id: user[0].cod_usuario, role: user[0].role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user[0].cod_usuario, role: user[0].role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.json({ message: 'Inicio de sesión exitoso', token });
 
